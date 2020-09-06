@@ -1,3 +1,5 @@
+// problem source: https://www.hackerrank.com/challenges/30-hello-world/problem
+
 #include <cmath>
 #include <cstdio>
 #include <vector>
