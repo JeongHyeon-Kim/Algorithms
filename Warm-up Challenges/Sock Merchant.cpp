@@ -8,8 +8,16 @@ vector<string> split_string(string);
 
 // Complete the sockMerchant function below.
 int sockMerchant(int n, vector<int> ar) {
-
-  return 0;
+  map<int, int> m;
+  int pairs_of_socks = 0;
+  for (int i = 0; i < ar.size(); i++) {
+      int key = ar[i];
+      m[key]++;
+  }
+  for (map<int, int>::iterator it = m.begin(); it != m.end(); it++) {
+      pairs_of_socks += it->second / 2;
+  }
+  return pairs_of_socks;
 }
 
 int main()
