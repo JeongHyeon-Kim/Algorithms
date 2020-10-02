@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // problem source: https://www.hackerrank.com/challenges/30-2d-arrays/problem
->>>>>>> d67014e29801fa72c59427e9a846d36f44a9fefb
 #include <bits/stdc++.h>
 
 using namespace std;
