@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/30-2d-arrays/problem
+// discussion reference: https://dojang.io/mod/page/view.php?id=34
 #include <bits/stdc++.h>
 
 using namespace std;
