@@ -5,8 +5,6 @@ using namespace std;
 
 vector<string> split_string(string);
 
-
-
 int main()
 {
     int t;
