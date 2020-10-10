@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/minimum-swaps-2/problem
+// discussion reference: https://www.hackerrank.com/challenges/minimum-swaps-2/forum/comments/458759
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -7,8 +8,48 @@ vector<string> split_string(string);
 
 // Complete the minimumSwaps function below.
 int minimumSwaps(vector<int> arr) {
+    // Pass only one case
+    // int pivot_index = arr.size() / 2;
+    // int count = 0;
+    // int left_sort = pivot_index;
+    // while (left_sort > 0) {
+    //     for (int i = 0; i < left_sort; i++) {
+    //         if (arr[i] > arr[left_sort]) {
+    //             int tmp = arr[left_sort];
+    //             arr[left_sort] = arr[i];
+    //             arr[i] = tmp;
+    //             count++;
+    //         }
+    //     }
+    //     left_sort--;
+    // }
+    // int right_sort = pivot_index;
+    // while (right_sort < arr.size()) {
+    //     for (int i = right_sort; i < arr.size(); i++) {
+    //         if (arr[i] < arr[right_sort]) {
+    //             int tmp = arr[right_sort];
+    //             arr[right_sort] = arr[i];
+    //             arr[i] = tmp;
+    //             count++;
+    //         }
+    //     }
+    //     right_sort++;
+    // }
+    // return count;
 
-
+    int count=0;
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] != i + 1) { // Confirm same with position  elements of the array and position sorting when ascending order
+                int pivot = i;
+                while(arr[pivot] != i+1)
+                    pivot++;
+                int tmp = arr[pivot];
+                arr[pivot] = arr[i];
+                arr[i] = tmp;
+                count++;
+            }
+        }
+        return count;
 }
 
 int main()
