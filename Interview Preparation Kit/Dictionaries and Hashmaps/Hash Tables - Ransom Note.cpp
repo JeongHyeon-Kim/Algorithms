@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/ctci-ransom-note/problem
+// discussion reference: https://www.hackerrank.com/challenges/ctci-ransom-note/forum/comments/788790
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -7,8 +8,19 @@ vector<string> split_string(string);
 
 // Complete the checkMagazine function below.
 void checkMagazine(vector<string> magazine, vector<string> note) {
+    unordered_map<string, int> freq; // bool -> int
 
-
+    for (auto i : magazine)
+       freq[i]++;
+    for (auto i : note) {
+       if (freq[i]) // More than once
+           freq[i]--; // Because values can use duplicate key values
+        else {
+            cout<< "No";
+            return;
+        }
+    }
+    cout<<"Yes";
 }
 
 int main()
