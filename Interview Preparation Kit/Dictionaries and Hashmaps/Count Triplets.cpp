@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/count-triplets-1/problem
+// discussion reference: https://nukeguys.tistory.com/155, https://www.hackerrank.com/challenges/count-triplets-1/forum/comments/864497
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -9,8 +10,42 @@ vector<string> split(const string &);
 
 // Complete the countTriplets function below.
 long countTriplets(vector<long> arr, long r) {
+    // 5/13 test cases failed
+    // map<long, int> number_count;
+    // int arr_size = arr.size();
+    // long result = 0;
+    // for (int i = 0; i < arr_size; i++)
+    //     number_count[arr[i]]++;
+    // if (r == 1) {
+    //     result = arr_size;
+    //     return result;
+    // }
+    // for (auto it = number_count.begin(); it != number_count.end(); it++) {
+    //     if (it->first % r == 0) {
+    //         long found_key = it->first, left_key = found_key / r, right_key = found_key * r;
+    //         if ( (number_count.find(left_key) != number_count.end())
+    //             && (number_count.find(right_key) != number_count.end()) ) {
+    //             result += number_count[found_key] * number_count[left_key] * number_count[right_key];
+    //         }
+    //     }
+    // }
+    // return result;
 
+    long counter = 0;
+    double rr = r; // for test case 3
 
+    unordered_map<double, long> left; // can dividing
+    unordered_map<double, long> right; // can multiplying
+
+    for (auto i : arr)
+        right[i]++; // counting
+    for (auto j : arr){
+        right[j]--; // testing
+        counter += left[j / rr] * right[j * rr];
+        left[j]++;
+    }
+
+    return counter;
 }
 
 int main()
