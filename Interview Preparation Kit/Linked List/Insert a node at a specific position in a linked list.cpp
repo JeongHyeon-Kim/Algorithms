@@ -70,8 +70,18 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
  *
  */
 SinglyLinkedListNode* insertNodeAtPosition(SinglyLinkedListNode* head, int data, int position) {
-
-
+    SinglyLinkedListNode* insertNode = new SinglyLinkedListNode(data);
+    auto it = head;
+    if (position == 0) {
+        insertNode->next = it->next;
+        it->next = insertNode;
+    } else {
+        while (--position > 0)
+            it = it->next;
+        insertNode->next = it->next;
+        it->next = insertNode;
+    }
+    return head;
 }
 
 int main()
