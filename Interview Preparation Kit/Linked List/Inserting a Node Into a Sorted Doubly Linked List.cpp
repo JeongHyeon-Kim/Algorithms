@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/insert-a-node-into-a-sorted-doubly-linked-list/problem
+// discussion reference: https://www.hackerrank.com/challenges/insert-a-node-into-a-sorted-doubly-linked-list/forum/comments/104213
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -74,8 +75,46 @@ void free_doubly_linked_list(DoublyLinkedListNode* node) {
  *
  */
 DoublyLinkedListNode* sortedInsert(DoublyLinkedListNode* head, int data) {
-
-
+    // 4/8 test cases failed
+    // DoublyLinkedListNode* newNode = new DoublyLinkedListNode(data);
+    // if (!head)
+    //     return newNode;
+    // auto it = head;
+    // auto last = head;
+    // while (it->data <= data) {
+    //     if (it->next) {
+    //         last = it;
+    //         it = it->next;
+    //     } else {
+    //         last = it;
+    //         break;
+    //     }
+    // }
+    // if (!last->prev) {
+    //     head = newNode;
+    //     newNode->next = last;
+    //     last->prev = newNode;
+    // } else {
+    //     newNode->next = last->next;
+    //     last->next = newNode;
+    //     newNode->prev = last;
+    // }
+    // return head;
+    if(head == nullptr) { // NULL node state
+        DoublyLinkedListNode* newNode = new DoublyLinkedListNode(data);
+        return newNode;
+    }
+    if(head->data <= data) { // moving location in list
+        head->next = sortedInsert(head->next, data);
+        head->next->prev = head;
+    } else if(head->data > data) { // first node
+        DoublyLinkedListNode* newNode = new DoublyLinkedListNode(data);
+        newNode->next = head;
+        newNode->prev = head->prev; // missing in in front of code
+        head->prev = newNode;
+        head = newNode;
+    }
+    return head;
 }
 
 int main()
