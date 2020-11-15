@@ -10,33 +10,36 @@ vector<string> split(const string &);
 
 // Complete the freqQuery function below.
 vector<int> freqQuery(vector<vector<int>> queries) {
-  // Code did not execute within the time limits
-  unordered_map<int, int> freqMap;
-  vector<int> result;
-  int q_size = queries.size();
-  for (int i = 0; i < q_size; i++) {
-      // cout << queries[i][0] << " " << queries[i][1] << endl;
-      // int operation =
-      if (queries[i][0] == 1) {
-          freqMap[queries[i][1]]++;
-      } else if (queries[i][0] == 2) {
-          if (freqMap.find(queries[i][1]) != freqMap.end() && freqMap[queries[i][1]] > 0)
-                  freqMap[queries[i][1]]--;
-      } else { // queries[i] == 3
-          bool found = false;
-          for (auto it = freqMap.begin(); it != freqMap.end(); it++) {
-              // cout << it->first << " " << it->second << endl;
-              if (it->second == queries[i][1])
-                  found = true;
-          }
-          if (found)
-              result.push_back(1);
-          else
-              result.push_back(0);
-          // cout << endl;
-      }
-  }
-  return result;
+    map<int, int> freqMap;
+    map<int, int> freqCountMap;
+    vector<int> result;
+    int q_size = queries.size();
+    for (int i = 0; i < q_size; i++) {
+        int operation = queries[i][0];
+        int element = queries[i][1];
+        if (operation == 1) {
+            int elem = freqMap[element];
+            if(elem > 0) { // not first
+                freqCountMap[elem]--; // because of increasing element (updateded count of frequency)
+            }
+            freqMap[element]++; // incresing frequency and
+            freqCountMap[freqMap[element]]++; // refreshing freqCountMap cause by increasing element
+        } else if (operation == 2) {
+            int temp = freqMap[element];
+            if (temp > 0) { // exist element
+                freqCountMap[temp]--; // because of decreasing element (updateded count of frequency)
+                freqMap[element]--; // decreasing frequency and
+                freqCountMap[freqMap[element]]++; // refreshing freqCountMap cause by decreasing element
+            }
+        } else { // operation == 3
+            int res = freqCountMap[element]; // solved time limit condition from searching by map
+            if (res > 0)
+                result.push_back(1);
+            else
+                result.push_back(0);
+        }
+    }
+    return result;
 }
 
 int main()
