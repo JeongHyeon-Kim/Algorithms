@@ -43,6 +43,13 @@ class Node {
 */
     int height(Node* root) {
         // Write your code here.
+        if (root == NULL)
+            return -1;
+        else {
+            int left_height = height(root->left) + 1;
+            int right_height = height(root->right) + 1;
+            return max(left_height, right_height);
+        }
     }
 
 }; //End of Solution
