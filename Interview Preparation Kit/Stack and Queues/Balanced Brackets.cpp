@@ -5,7 +5,6 @@ using namespace std;
 
 // Complete the isBalanced function below.
 string isBalanced(string s) {
-    // Occured segmentation fault in 18 cases
     int s_size = s.size();
     stack<char> balanced;
     char start_bracket[3] = {'(', '{', '['};
@@ -19,9 +18,12 @@ string isBalanced(string s) {
                 if (s[i] == start_bracket[j])
                     balanced.push(s[i]);
                 else if (s[i] == end_bracket[j]) {
-                    if (balanced.top() == start_bracket[j])
-                        balanced.pop();
-                    else
+                    if (!balanced.empty()) {
+                        if (balanced.top() == start_bracket[j])
+                            balanced.pop();
+                        else
+                            return "NO";
+                    } else
                         return "NO";
                 }
             }
