@@ -44,32 +44,14 @@ class Node {
 */
 
     Node *lca(Node *root, int v1,int v2) {
-		// Write your code here.
+        // BST : smaller -> left, bigger -> right
+        // 4/10 test cases failed
+        if (root->data > v1 && root->data > v2)
+            lca(root->left, v1, v2);
+        if (root->data < v1 && root->data < v2)
+            lca(root->right, v1,v2);
+        // found lca
+        return root;
     }
 
 }; //End of Solution
-
-int main() {
-
-    Solution myTree;
-    Node* root = NULL;
-
-    int t;
-    int data;
-
-    std::cin >> t;
-
-    while(t-- > 0) {
-        std::cin >> data;
-        root = myTree.insert(root, data);
-    }
-
-  	int v1, v2;
-  	std::cin >> v1 >> v2;
-
-    Node *ans = myTree.lca(root, v1, v2);
-
-  	std::cout << ans->data;
-
-    return 0;
-}
