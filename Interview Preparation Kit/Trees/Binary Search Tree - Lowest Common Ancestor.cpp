@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem
+// discussion reference: https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/forum/comments/73223
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -45,11 +46,10 @@ class Node {
 
     Node *lca(Node *root, int v1,int v2) {
         // BST : smaller -> left, bigger -> right
-        // 4/10 test cases failed
         if (root->data > v1 && root->data > v2)
-            lca(root->left, v1, v2);
+            return lca(root->left, v1, v2);
         if (root->data < v1 && root->data < v2)
-            lca(root->right, v1,v2);
+            return lca(root->right, v1,v2);
         // found lca
         return root;
     }
