@@ -23,16 +23,10 @@ vector<int> dynamicArray(int n, vector<vector<int>> queries) {
     vector<int> result;
     for (int i = 0; i < q_size; i++) {
         if (queries[i][0] == 1) {
-            seq[queries[i][1] ^ lastAnswer % n].push_back(queries[i][2]);
-            // cout << (queries[i][1] ^ lastAnswer % n) << " ";
-            // cout << queries[i][2] << endl;
+            seq[(queries[i][1] ^ lastAnswer) % n].push_back(queries[i][2]);
         } else { // queries[i][0] == 2
-            // cout << (queries[i][1] ^ lastAnswer % n) << " ";
-            int seq_size = seq[queries[i][1] ^ lastAnswer % n].size();
-            // cout << seq_size << " ";
-            lastAnswer = seq[queries[i][1] ^ lastAnswer % n][queries[i][2] % seq_size];
-            // cout << (queries[i][2] ^ seq_size) << " ";
-            // cout << lastAnswer << endl;
+            int seq_size = seq[(queries[i][1] ^ lastAnswer) % n].size();
+            lastAnswer = seq[(queries[i][1] ^ lastAnswer) % n][queries[i][2] % seq_size];
             result.push_back(lastAnswer);
         }
     }
