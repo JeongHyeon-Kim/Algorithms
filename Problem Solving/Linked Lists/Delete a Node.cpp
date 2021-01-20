@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
+// discussion reference: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/forum/comments/73991
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -70,12 +71,28 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
  *
  */
 SinglyLinkedListNode* deleteNode(SinglyLinkedListNode* head, int position) {
-    // cout << position << endl;
-    SinglyLinkedListNode* = head;
-    while (position-- > 0) {
+    if (position == 0)
+        return head->next;
+    else {
+        head->next = deleteNode(head->next, position - 1);
+        return head;
+    }
+    /*
+    SinglyLinkedListNode* iterator = head;
+    SinglyLinkedListNode* new_list = head;
+    int location = 0;
+    while (iterator) {
+        cout << iterator->data << endl;
+        if (location != position) {
+            new_list->next = iterator;
+            iterator = iterator->next;
+        } else {
 
+        }
+        location++;
     }
     return head;
+    */
 }
 
 int main()
