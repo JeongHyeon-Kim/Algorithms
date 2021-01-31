@@ -74,8 +74,17 @@ void free_doubly_linked_list(DoublyLinkedListNode* node) {
  *
  */
 DoublyLinkedListNode* reverse(DoublyLinkedListNode* head) {
-
-
+    stack<int> data;
+    DoublyLinkedList newHead;
+    while (head) {
+        data.push(head->data);
+        head = head->next;
+    }
+    while (!data.empty()) {
+        newHead.insert_node(data.top());
+        data.pop();
+    }
+    return newHead.head;
 }
 
 int main()
