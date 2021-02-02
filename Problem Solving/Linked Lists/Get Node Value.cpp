@@ -1,5 +1,4 @@
-// problem source: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
-// discussion reference: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/forum/comments/73991
+// problem source: https://www.hackerrank.com/challenges/get-the-value-of-the-node-at-a-specific-position-from-the-tail/problem
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -59,7 +58,7 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
     }
 }
 
-// Complete the deleteNode function below.
+// Complete the getNode function below.
 
 /*
  * For your reference:
@@ -70,59 +69,48 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
  * };
  *
  */
-SinglyLinkedListNode* deleteNode(SinglyLinkedListNode* head, int position) {
-    if (position == 0)
-        return head->next;
-    else {
-        head->next = deleteNode(head->next, position - 1);
-        return head;
+int getNode(SinglyLinkedListNode* head, int positionFromTail) {
+    stack<int> data;
+    while (head) {
+        data.push(head->data);
+        head = head->next;
     }
-    /*
-    SinglyLinkedListNode* iterator = head;
-    SinglyLinkedListNode* new_list = head;
-    int location = 0;
-    while (iterator) {
-        cout << iterator->data << endl;
-        if (location != position) {
-            new_list->next = iterator;
-            iterator = iterator->next;
-        } else {
-
-        }
-        location++;
-    }
-    return head;
-    */
+    while (positionFromTail-- > 0 && !data.empty())
+        data.pop();
+    return data.top();
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    SinglyLinkedList* llist = new SinglyLinkedList();
-
-    int llist_count;
-    cin >> llist_count;
+    int tests;
+    cin >> tests;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    for (int i = 0; i < llist_count; i++) {
-        int llist_item;
-        cin >> llist_item;
+    for (int tests_itr = 0; tests_itr < tests; tests_itr++) {
+        SinglyLinkedList* llist = new SinglyLinkedList();
+
+        int llist_count;
+        cin >> llist_count;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        llist->insert_node(llist_item);
+        for (int i = 0; i < llist_count; i++) {
+            int llist_item;
+            cin >> llist_item;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            llist->insert_node(llist_item);
+        }
+
+        int position;
+        cin >> position;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        int result = getNode(llist->head, position);
+
+        fout << result << "\n";
     }
-
-    int position;
-    cin >> position;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    SinglyLinkedListNode* llist1 = deleteNode(llist->head, position);
-
-    print_singly_linked_list(llist1, " ", fout);
-    fout << "\n";
-
-    free_singly_linked_list(llist1);
 
     fout.close();
 

@@ -1,5 +1,4 @@
-// problem source: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem
-// discussion reference: https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/forum/comments/73991
+// problem source: https://www.hackerrank.com/challenges/compare-two-linked-lists/problem
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -59,7 +58,7 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
     }
 }
 
-// Complete the deleteNode function below.
+// Complete the compare_lists function below.
 
 /*
  * For your reference:
@@ -70,59 +69,57 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
  * };
  *
  */
-SinglyLinkedListNode* deleteNode(SinglyLinkedListNode* head, int position) {
-    if (position == 0)
-        return head->next;
-    else {
-        head->next = deleteNode(head->next, position - 1);
-        return head;
+bool compare_lists(SinglyLinkedListNode* head1, SinglyLinkedListNode* head2) {
+    while (head1) {
+        if (!head2 || head1->data != head2->data)
+            return false;
+        head1 = head1->next;
+        head2 = head2->next;
     }
-    /*
-    SinglyLinkedListNode* iterator = head;
-    SinglyLinkedListNode* new_list = head;
-    int location = 0;
-    while (iterator) {
-        cout << iterator->data << endl;
-        if (location != position) {
-            new_list->next = iterator;
-            iterator = iterator->next;
-        } else {
-
-        }
-        location++;
-    }
-    return head;
-    */
+    return true;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    SinglyLinkedList* llist = new SinglyLinkedList();
-
-    int llist_count;
-    cin >> llist_count;
+    int tests;
+    cin >> tests;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    for (int i = 0; i < llist_count; i++) {
-        int llist_item;
-        cin >> llist_item;
+    for (int tests_itr = 0; tests_itr < tests; tests_itr++) {
+        SinglyLinkedList* llist1 = new SinglyLinkedList();
+
+        int llist1_count;
+        cin >> llist1_count;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        llist->insert_node(llist_item);
+        for (int i = 0; i < llist1_count; i++) {
+            int llist1_item;
+            cin >> llist1_item;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            llist1->insert_node(llist1_item);
+        }
+
+      	SinglyLinkedList* llist2 = new SinglyLinkedList();
+
+        int llist2_count;
+        cin >> llist2_count;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+        for (int i = 0; i < llist2_count; i++) {
+            int llist2_item;
+            cin >> llist2_item;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            llist2->insert_node(llist2_item);
+        }
+
+        bool result = compare_lists(llist1->head, llist2->head);
+
+        fout << result << "\n";
     }
-
-    int position;
-    cin >> position;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    SinglyLinkedListNode* llist1 = deleteNode(llist->head, position);
-
-    print_singly_linked_list(llist1, " ", fout);
-    fout << "\n";
-
-    free_singly_linked_list(llist1);
 
     fout.close();
 
