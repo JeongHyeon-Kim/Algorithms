@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/equal-stacks/problem
+// discussion reference: https://www.hackerrank.com/challenges/equal-stacks/forum/comments/912161
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,7 +19,62 @@ vector<string> split(const string &);
  */
 
 int equalStacks(vector<int> h1, vector<int> h2, vector<int> h3) {
+    int h1_size = h1.size();
+    int h2_size = h2.size();
+    int h3_size = h3.size();
 
+    stack<int> s1, s2, s3;
+    int h1_height = 0, h2_height = 0, h3_height = 0;
+    for (int i = h1_size - 1; i >= 0; i--) {
+        s1.push(h1[i]);
+        h1_height += h1[i];
+    }
+    for (int i = h2_size - 1; i >= 0; i--) {
+        s2.push(h2[i]);
+        h2_height += h2[i];
+    }
+    for (int i = h3_size - 1; i >= 0; i--) {
+        s3.push(h3[i]);
+        h3_height += h3[i];
+    }
+    // while (!s1.empty() && !s2.empty()) {
+    //     if (h1_height == h2_height) {
+    //         while (!s3.empty()) {
+    //             if (h2_height == h3_height)
+    //                 return h3_height;
+    //             else {
+    //                 h3_height -= s3.top();
+    //                 s3.pop();
+    //             }
+    //         }
+    //     } else {
+    //         if (h1_height > h2_height) {
+    //             h1_height -= s1.top();
+    //             s1.pop();
+    //         } else {
+    //             h2_height -= s2.top();
+    //             s2.pop();
+    //         }
+    //     }
+    // }
+    while (!s1.empty() || !s2.empty() || !s3.empty() ) {
+        int minimal_value = min({h1_height, h2_height, h3_height});
+        while (h1_height > minimal_value) {
+                h1_height -= s1.top();
+                s1.pop();
+        }
+        while (h2_height > minimal_value) {
+                h2_height -= s2.top();
+                s2.pop();
+        }
+        while (h3_height > minimal_value) {
+                h3_height -= s3.top();
+                s3.pop();
+        }
+        if (h1_height == h2_height && h2_height == h3_height)
+            return h3_height;
+    }
+    return 0;
 }
 
 int main()
