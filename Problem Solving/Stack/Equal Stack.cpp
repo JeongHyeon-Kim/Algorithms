@@ -37,6 +37,7 @@ int equalStacks(vector<int> h1, vector<int> h2, vector<int> h3) {
         s3.push(h3[i]);
         h3_height += h3[i];
     }
+    // // Terminated due to timeout
     // while (!s1.empty() && !s2.empty()) {
     //     if (h1_height == h2_height) {
     //         while (!s3.empty()) {
