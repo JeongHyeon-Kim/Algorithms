@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/reduced-string/problem
+// discussion reference: https://www.hackerrank.com/challenges/reduced-string/forum/comments/152197
 #include <bits/stdc++.h>
 
 using namespace std;
