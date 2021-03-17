@@ -1,0 +1,31 @@
+// problem source: https://www.hackerrank.com/challenges/smart-number/problem
+// discussion reference: https://www.hackerrank.com/challenges/smart-number/forum/comments/601868
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool is_smart_number(int num) {
+    int val = (int) sqrt(num);
+    if ( (double) num / val == val)
+        return true;
+    return false;
+}
+
+int main() {
+
+    int test_cases;
+    cin >> test_cases;
+    int num;
+    for(int i = 0; i < test_cases; i++) {
+        cin >> num;
+        bool ans = is_smart_number(num);
+        if(ans) {
+            cout << "YES" << endl;
+        }
+        else cout << "NO" << endl;
+    }
+    return 0;
+}
