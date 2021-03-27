@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/ctci-ice-cream-parlor/problem
+// discussion reference: https://www.hackerrank.com/challenges/ctci-ice-cream-parlor/forum/comments/399260
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -7,8 +8,15 @@ vector<string> split_string(string);
 
 // Complete the whatFlavors function below.
 void whatFlavors(vector<int> cost, int money) {
-
-
+    int cost_size = cost.size();
+    unordered_map<int, int> locationOfCost;
+    for (int i = 0; i < cost_size; i++) {
+        if (locationOfCost.count(money - cost[i])) {
+            cout << locationOfCost[money - cost[i]] + 1 << " " << i + 1 << endl;
+            return;
+        }
+        locationOfCost[cost[i]] = i;
+    }
 }
 
 int main()

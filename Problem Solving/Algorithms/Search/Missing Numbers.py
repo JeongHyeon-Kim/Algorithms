@@ -1,3 +1,5 @@
+# problem source: https://www.hackerrank.com/challenges/missing-numbers/problem
+# discussion reference: https://www.hackerrank.com/challenges/missing-numbers/forum/comments/815842
 #!/bin/python3
 
 import math
