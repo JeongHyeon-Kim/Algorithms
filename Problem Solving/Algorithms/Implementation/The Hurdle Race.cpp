@@ -7,8 +7,16 @@ vector<string> split_string(string);
 
 // Complete the hurdleRace function below.
 int hurdleRace(int k, vector<int> height) {
-
-
+    int height_count = height.size();
+    int max_height = INT_MIN;
+    for (int i = 0; i < height_count; i++) {
+        if (max_height < height[i])
+            max_height = height[i];
+    }
+    if (max_height - k >= 0)
+        return max_height - k;
+    else
+        return 0;
 }
 
 int main()
