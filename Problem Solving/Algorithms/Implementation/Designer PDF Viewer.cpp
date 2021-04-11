@@ -1,5 +1,4 @@
 // problem source: https://www.hackerrank.com/challenges/designer-pdf-viewer/problem
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -8,8 +7,14 @@ vector<string> split_string(string);
 
 // Complete the designerPdfViewer function below.
 int designerPdfViewer(vector<int> h, string word) {
-
-
+    int h_size = h.size();
+    int word_size = word.length();
+    int tallest_letter_height = 0;
+    for (int i = 0; i < word_size; i++) {
+        if (tallest_letter_height < h[word[i] - 97])
+            tallest_letter_height = h[word[i] - 97];
+    }
+    return tallest_letter_height * word_size;
 }
 
 int main()
