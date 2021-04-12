@@ -1,5 +1,6 @@
 // problem source: https://www.hackerrank.com/challenges/picking-numbers/problem
 #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -15,7 +16,28 @@ vector<string> split(const string &);
  */
 
 int pickingNumbers(vector<int> a) {
+    int a_size = a.size();
+    map<int, int> number_pair; // number and count
+    int max_length = 0;
 
+    for (int i = 0; i < a_size; i++)
+        number_pair[a[i]]++;
+
+    int pre_first = number_pair.begin()->first;
+    int pre_second = number_pair.begin()->second;
+
+    for (auto i = number_pair.begin(); i != number_pair.end(); i++) {
+        if (max_length < i->second)
+            max_length = i->second;
+    }
+
+    for (auto i = ++(number_pair.begin()); i != number_pair.end(); i++) {
+        if (abs(pre_first - i->first) <= 1 && max_length < (pre_second + i->second))
+                max_length = pre_second + i->second;
+        pre_first = i->first;
+        pre_second = i->second;
+    }
+    return max_length;
 }
 
 int main()
