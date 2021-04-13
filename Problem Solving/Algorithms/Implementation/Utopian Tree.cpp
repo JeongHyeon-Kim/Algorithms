@@ -5,8 +5,14 @@ using namespace std;
 
 // Complete the utopianTree function below.
 int utopianTree(int n) {
-
-
+    int result_height = 1;
+    for (int i = 0; i < n; i++) {
+        if (i % 2 == 1)
+            result_height = result_height + 1;
+        else
+            result_height = result_height * 2;
+    }
+    return result_height;
 }
 
 int main()
