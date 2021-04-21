@@ -7,8 +7,16 @@ vector<string> split_string(string);
 
 // Complete the angryProfessor function below.
 string angryProfessor(int k, vector<int> a) {
-
-
+    int a_size = a.size();
+    int on_time = 0;
+    for (int i = 0; i< a_size; i++) {
+        if (a[i] <= 0)
+            on_time++;
+    }
+    if (k <= on_time)
+        return "NO";
+    else
+        return "YES";
 }
 
 int main()
