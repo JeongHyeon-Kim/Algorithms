@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/beautiful-days-at-the-movies/problem
+// discussion reference: https://doodle-ns.tistory.com/17
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -7,8 +8,16 @@ vector<string> split_string(string);
 
 // Complete the beautifulDays function below.
 int beautifulDays(int i, int j, int k) {
-
-
+    int beautiful_day_count = 0;
+    for (int range = i; range <= j; range++) {
+        string s = to_string(range);
+        reverse(s.begin(), s.end());
+        int range_reverse = atoi(s.c_str());
+        int diff = abs(range - range_reverse);
+        if (diff % k == 0)
+            beautiful_day_count++;
+    }
+    return beautiful_day_count;
 }
 
 int main()
