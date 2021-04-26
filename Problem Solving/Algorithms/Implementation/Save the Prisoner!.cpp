@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/save-the-prisoner/problem
+// discussion reference: https://www.hackerrank.com/challenges/save-the-prisoner/forum/comments/185775
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -18,7 +19,12 @@ vector<string> split(const string &);
  */
 
 int saveThePrisoner(int n, int m, int s) {
-
+    // 10/12 test cases failed
+    // if (m % n + s - 1 > 0)
+    //     return m % n + s - 1;
+    // else
+    //     return s;
+    return (m + s - 2) % n + 1;
 }
 
 int main()
