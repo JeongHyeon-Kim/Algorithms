@@ -3,26 +3,48 @@
 
 using namespace std;
 
-vector<string> split_string(string);
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
 
-// Complete the permutationEquation function below.
+/*
+ * Complete the 'permutationEquation' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY p as parameter.
+ */
+
 vector<int> permutationEquation(vector<int> p) {
-
-
+    int p_size = p.size();
+    vector<int> result;
+    for (int i = 0; i < p_size; i++) {
+        int x = i + 1;
+        for (int j = 0; j < p_size; j++) {
+            if (x == p[j]) {
+                for (int k = 0; k < p_size; k++) {
+                    if (j + 1 == p[k]) {
+                        result.push_back(k + 1);
+                    }
+                }
+            }
+        }
+    }
+    return result;
 }
 
 int main()
 {
     ofstream fout(getenv("OUTPUT_PATH"));
 
-    int n;
-    cin >> n;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string n_temp;
+    getline(cin, n_temp);
+
+    int n = stoi(ltrim(rtrim(n_temp)));
 
     string p_temp_temp;
     getline(cin, p_temp_temp);
 
-    vector<string> p_temp = split_string(p_temp_temp);
+    vector<string> p_temp = split(rtrim(p_temp_temp));
 
     vector<int> p(n);
 
@@ -34,7 +56,7 @@ int main()
 
     vector<int> result = permutationEquation(p);
 
-    for (int i = 0; i < result.size(); i++) {
+    for (size_t i = 0; i < result.size(); i++) {
         fout << result[i];
 
         if (i != result.size() - 1) {
@@ -49,31 +71,41 @@ int main()
     return 0;
 }
 
-vector<string> split_string(string input_string) {
-    string::iterator new_end = unique(input_string.begin(), input_string.end(), [] (const char &x, const char &y) {
-        return x == y and x == ' ';
-    });
+string ltrim(const string &str) {
+    string s(str);
 
-    input_string.erase(new_end, input_string.end());
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
 
-    while (input_string[input_string.length() - 1] == ' ') {
-        input_string.pop_back();
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
     }
 
-    vector<string> splits;
-    char delimiter = ' ';
+    tokens.push_back(str.substr(start));
 
-    size_t i = 0;
-    size_t pos = input_string.find(delimiter);
-
-    while (pos != string::npos) {
-        splits.push_back(input_string.substr(i, pos - i));
-
-        i = pos + 1;
-        pos = input_string.find(delimiter, i);
-    }
-
-    splits.push_back(input_string.substr(i, min(pos, input_string.length()) - i + 1));
-
-    return splits;
+    return tokens;
 }
