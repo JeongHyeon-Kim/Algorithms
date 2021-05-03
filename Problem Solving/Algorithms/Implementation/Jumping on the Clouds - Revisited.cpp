@@ -7,8 +7,22 @@ vector<string> split_string(string);
 
 // Complete the jumpingOnClouds function below.
 int jumpingOnClouds(vector<int> c, int k) {
-
-
+    int c_size = c.size();
+    int eneryge_level = 100;
+    int i = 0;
+    while ( (i + k) % c_size != 0) {
+        cout << (i + k) % c_size << " ";
+        if (c[(i + k) % c_size])
+            eneryge_level = eneryge_level - 3;
+        else
+            eneryge_level = eneryge_level - 1;
+        i = i + k;
+    }
+    if (c[(i + k) % c_size])
+        eneryge_level = eneryge_level - 3;
+    else
+        eneryge_level = eneryge_level - 1;
+    return eneryge_level;
 }
 
 int main()
