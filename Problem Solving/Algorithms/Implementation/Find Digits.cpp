@@ -14,7 +14,23 @@ string rtrim(const string &);
  */
 
 int findDigits(int n) {
-
+    int init_n = n;
+    vector<int> divided_digit;
+    int divisor_count = 0;
+    while (n != 0) {
+        divided_digit.push_back(n % 10);
+        n = n / 10;
+    }
+    int digit_size = divided_digit.size();
+    for (int i = 0; i < digit_size; i++) {
+        if (divided_digit[i] == 0)
+            continue;
+        else {
+            if (init_n % divided_digit[i] == 0)
+                divisor_count++;
+        }
+    }
+    return divisor_count;
 }
 
 int main()
