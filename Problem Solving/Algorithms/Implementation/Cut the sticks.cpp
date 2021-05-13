@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/cut-the-sticks/problem
+// discussion reference: https://www.hackerrank.com/challenges/cut-the-sticks/forum
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -15,7 +16,16 @@ vector<string> split(const string &);
  */
 
 vector<int> cutTheSticks(vector<int> arr) {
-
+    vector<int> result;
+    int arr_size = arr.size();
+    result.push_back(arr_size);
+    sort(arr.begin(), arr.end());
+    for (int i = 1; i < arr_size; i++) {
+        if (arr[i] != arr[i - 1]) {
+            arr.push_back(arr[arr_size - i]);
+        }
+    }
+    return result;
 }
 
 int main()
