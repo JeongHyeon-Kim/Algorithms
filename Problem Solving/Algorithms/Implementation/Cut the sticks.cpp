@@ -21,9 +21,8 @@ vector<int> cutTheSticks(vector<int> arr) {
     result.push_back(arr_size);
     sort(arr.begin(), arr.end());
     for (int i = 1; i < arr_size; i++) {
-        if (arr[i] != arr[i - 1]) {
-            arr.push_back(arr[arr_size - i]);
-        }
+        if (arr[i] != arr[i - 1])
+            result.push_back(arr_size - i);
     }
     return result;
 }
