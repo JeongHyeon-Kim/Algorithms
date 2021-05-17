@@ -15,7 +15,16 @@ vector<string> split(const string &);
  */
 
 int equalizeArray(vector<int> arr) {
-
+    int arr_size = arr.size();
+    unordered_map<int, int> element_count;
+    int max_count = INT_MIN;
+    for (int i = 0; i < arr_size; i++)
+        element_count[arr[i]]++;
+    for (auto i = element_count.begin(); i != element_count.end(); i++) {
+        if (i->second > max_count)
+            max_count = i->second;
+    }
+    return arr_size - max_count;
 }
 
 int main()
