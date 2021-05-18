@@ -1,4 +1,5 @@
 // problem source: https://www.hackerrank.com/challenges/library-fine/problem
+// discussion reference: https://www.hackerrank.com/challenges/30-nested-logic/problem
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -21,7 +22,21 @@ vector<string> split(const string &);
  */
 
 int libraryFine(int d1, int m1, int y1, int d2, int m2, int y2) {
-
+    int actualDay = d1, actualMonth = m1, actualYear = y1;
+    int expectedDay = d2, expectedMonth = m2, expectedYear = y2;
+    int fine = 0;
+    if (expectedYear < actualYear)
+        fine = 10000;
+    else if (expectedYear == actualYear) {
+        if (expectedMonth < actualMonth)
+            fine = (actualMonth - expectedMonth) * 500;
+        else if (expectedMonth == actualMonth) {
+            if (expectedDay < actualDay) {
+                fine = (actualDay - expectedDay) * 15;
+            }
+        }
+    }
+    return fine;
 }
 
 int main()
