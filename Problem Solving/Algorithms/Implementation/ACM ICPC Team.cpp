@@ -15,7 +15,31 @@ vector<string> split(const string &);
  */
 
 vector<int> acmTeam(vector<string> topic) {
-
+    vector<int> result;
+    int topic_count = topic.size();
+    unordered_map<int, int> max_count;
+    for (int i = 0; i < topic_count - 1; i++) {
+        for (int j = i + 1; j < topic_count; j++) {
+            int length = topic[i].size();
+            int knowns = 0;
+            for (int k = 0; k < length; k++) {
+                if (topic[i][k] == '1' || topic[j][k] == '1')
+                    knowns++;
+            }
+            max_count[knowns]++;
+        }
+    }
+    int max_knowns = INT_MIN;
+    int count = 0;
+    for (auto i = max_count.begin(); i != max_count.end(); i++) {
+        if (max_knowns < i->first) {
+            max_knowns = i->first;
+            count = i->second;
+        }
+    }
+    result.push_back(max_knowns);
+    result.push_back(count);
+    return result;
 }
 
 int main()
