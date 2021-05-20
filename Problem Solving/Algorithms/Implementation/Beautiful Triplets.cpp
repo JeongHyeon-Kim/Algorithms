@@ -15,9 +15,40 @@ vector<string> split(const string &);
  *  1. INTEGER d
  *  2. INTEGER_ARRAY arr
  */
+ int beautifulTriplets(int d, vector<int> arr) {
+     int arr_size = arr.size();
+     vector<int> middle_result;
+     int count = 0;
+     for (int i = 0; i < arr_size - 2; i++) {
+         for (int j = i + 1; j < arr_size - 1; j++) {
+             if (arr[j] - arr[i] == d) {
+                 middle_result.push_back(arr[j]);
+             }
+         }
+     }
+     int middle_result_size = middle_result.size();
+     for (int i = 0; i < middle_result_size; i++) {
+         for (int j = 2; j < arr_size; j++) {
+             if (arr[j] - middle_result[i] == d)
+                     count++;
+         }
+     }
+     return count;
 
-int beautifulTriplets(int d, vector<int> arr) {
-
+    // Terminated due to timeout
+    // int arr_size = arr.size();
+    // int count = 0;
+    // for (int i = 0; i < arr_size - 2; i++) {
+    //     for (int j = i + 1; j < arr_size - 1; j++) {
+    //         for (int k = j + 1; k < arr_size; k++) {
+    //             if (arr[j] - arr[i] == d) {
+    //                 if (arr[j] - arr[i] == arr[k] - arr[j])
+    //                     count++;
+    //             }
+    //         }
+    //     }
+    // }
+    // return count;
 }
 
 int main()
