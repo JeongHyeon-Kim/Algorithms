@@ -14,7 +14,29 @@ string rtrim(const string &);
  */
 
 int beautifulBinaryString(string b) {
-
+    int b_size = b.size();
+    string sub = "010";
+    int count = 0;
+    bool found = true;
+    while (found) {
+        found = false;
+        for (int i = 0; i < b_size - 2; i++) {
+            if (b[i] == '0' && b[i + 1] == '1' && b[i + 2] == '0') {
+                found = true;
+                if (b[i + 3] == '0') {
+                    b[i + 1] = '0';
+                    count++;
+                } else if (b[i + 3] == '1') {
+                    b[i + 2] = '1';
+                    count++;
+                } else { // b[i + 3] == '\0' is end of string
+                    b[i + 1] = '0';
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
 }
 
 int main()
