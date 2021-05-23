@@ -14,7 +14,19 @@ string rtrim(const string &);
  */
 
 int theLoveLetterMystery(string s) {
-
+    int s_size = s.size();
+    int count = 0;
+    for (int i = 0; i < s_size / 2; i++) {
+        if (s[i] != s[s_size - 1 - i]) {
+            if (s[i] > s[s_size - 1 - i])
+                count += s[i] - s[s_size - 1 - i];
+            else if (s[i] < s[s_size - 1 - i])
+                count += s[s_size - 1 - i] - s[i];
+            else
+                continue;
+        }
+    }
+    return count;
 }
 
 int main()
