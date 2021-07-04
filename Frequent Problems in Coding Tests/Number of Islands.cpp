@@ -1,3 +1,5 @@
+// problem source: https: https://leetcode.com/problems/number-of-islands/
+// discussion reference: https://leetcode.com/problems/number-of-islands/discuss/1310175/C%2B%2B-DFS-and-BFS-(can-be-used-as-a-template-for-many-2D-matrix-problems)
 class Solution {
 public:
     void bfs(vector<vector<char>>& grid, int i, int j) {
