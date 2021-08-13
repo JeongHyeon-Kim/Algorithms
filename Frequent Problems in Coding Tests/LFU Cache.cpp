@@ -1,16 +1,30 @@
 // problem source: https://leetcode.com/problems/lfu-cache/
-class LFUCache {
+// discussion reference: https://stackoverflow.com/questions/9370945/c-help-finding-the-max-value-in-a-map
+class LFUCache { // LFU = LFU + LRU (same with count)
 public:
+    unordered_map<int, int> data;
+    unordered_map<int, int> count;
+    int cap;
     LFUCache(int capacity) {
-
+        data.clear();
+        count.clear();
+        cap = capacity;
     }
 
     int get(int key) {
-
+        count[key]++;
+        return data[key];
     }
 
     void put(int key, int value) {
-
+        if(cap > 0) {
+            cap--;
+            count[key]++;
+            data[key] = value;
+        } else if (cap == 0) {
+            cout << "exceed" << endl;
+            unordered_map<int, int>::iterator max_elem = std::max_element(count.begin(), count.end(), [] (const pair<int, int>& a, const pair<int, int>& b)->bool{ return a.second < b.second; } );
+        }
     }
 };
 
