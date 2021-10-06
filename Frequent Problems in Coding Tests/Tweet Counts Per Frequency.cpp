@@ -18,31 +18,26 @@ public:
         for (int i = 0; i < recording_size; i++) {
             if (recording[i].first == tweetName) {
                 if (freq == "minute")
-                    chunk_unit = 60;
+                    chunk_unit = 59;
                 else if (freq == "hour")
-                    chunk_unit = 3600;
+                    chunk_unit = 3599;
                 else // freq == "day"
-                    chunk_unit = 864000;
-
-
-                for (int j = startTime; j <= endTime; j += chunk_unit) {
-                    if (recording[i].second >= startTime && recording[i].second <= endTime)
-                        middle_solution[j / chunk_unit]++;
-                }
+                    chunk_unit = 86399;
+                if (recording[i].second >= startTime && recording[i].second <= endTime)
+                    middle_solution[recording[i].second / chunk_unit]++;
             }
         }
+
+        cout << startTime << " " << endTime << endl;
+        int count = 0;
         for (int i = startTime; i <= endTime; i += chunk_unit) {
             if (middle_solution[i / chunk_unit] != 0)
-                result.push_back(middle_solution[i]);
+                result.push_back(middle_solution[i / chunk_unit]);
             else
                 result.push_back(0);
+            count++;
         }
-        // for (int i = 0; i < 10001; i++) {
-        //     if (middle_solution[i] != 0)
-        //         result.push_back(middle_solution[i]);
-        // }
-        // if (result.empty())
-        //     result.push_back(0);
+        cout << count << endl;
         return result;
     }
 };
