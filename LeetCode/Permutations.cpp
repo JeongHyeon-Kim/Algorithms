@@ -4,10 +4,10 @@ class Solution {
 public:
     vector<vector<int>> permute(vector<int>& nums) {
         vector<vector<int>> result;
-        int nums_size = nums.size();
-        for (int i = 0; i < nums_size; i++)
-            cout << nums[i] << " ";
-        cout << endl;
+        sort(nums.begin(), nums.end());
+        result.push_back(nums);
+        while(next_permutation(nums.begin(), nums.end()))
+            result.push_back(nums);
         return result;
     }
 };
