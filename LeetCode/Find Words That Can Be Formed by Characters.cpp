@@ -1,4 +1,32 @@
 // problem source: https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/
+
+// discussion reference: https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/discuss/360978/C++-Track-Count
+// Runtime: 68 ms, faster than 81.69% of C++ online submissions for Find Words That Can Be Formed by Characters.
+// Memory Usage: 17.7 MB, less than 81.19% of C++ online submissions for Find Words That Can Be Formed by Characters.
+
+class Solution {
+public:
+    int countCharacters(vector<string>& words, string chars) {
+        int count[26] = {}, result = 0;
+        for (auto individual_char : chars)
+            count[individual_char - 'a']++;
+        for (auto word : words) {
+            int temp_count[26] = {};
+            bool match = true;
+            for (auto individual_char : word) {
+                if (temp_count[individual_char - 'a']++ >= count[individual_char - 'a']) {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) {
+                cout << word << endl;
+                result += word.length();}
+        }
+        return result;
+    }
+};
+
 // Runtime: 386 ms, faster than 9.68% of C++ online submissions for Find Words That Can Be Formed by Characters.
 // Memory Usage: 51.6 MB, less than 17.58% of C++ online submissions for Find Words That Can Be Formed by Characters.
 class Solution {
