@@ -2,6 +2,7 @@
 // wrong with next case
 // "adceb"
 // "*a*b"
+// 같은 문자열이 있을 때까진 공백으로 가정 필요
 class Solution {
 public:
     bool isMatch(string s, string p) {
