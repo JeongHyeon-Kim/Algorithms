@@ -1,4 +1,7 @@
 // problem source: https://leetcode.com/problems/wildcard-matching/
+// wrong with next case
+// "adceb"
+// "*a*b"
 class Solution {
 public:
     bool isMatch(string s, string p) {
