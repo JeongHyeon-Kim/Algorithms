@@ -1,4 +1,5 @@
 // problem source: https://leetcode.com/problems/spiral-matrix/
+// discussion reference: https://leetcode.com/problems/spiral-matrix/solutions/978853/c-0ms-faster-than-100-easy-solution-with-proper-explanation/
 
 // 행과 열의 기점/종점을 기준으로 진행 방향 변경 (오른쪽, 아래, 왼쪽, 위로)
 // 기점과 종점의 크기가 점점 줄어들기 때문에 체킹 필요
